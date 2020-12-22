@@ -2,6 +2,7 @@ import { make, append } from './util.js'
 import { assets } from './asset.js'
 import { leftHand, rightHand } from './controllers.js'
 import environment from './env.js'
+import './layout.js'
 
 const scene = make({ type: 'scene' })
 const cameraRig = make({ id: 'cameraRig', type: 'entity' })

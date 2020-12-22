@@ -13,7 +13,7 @@ const sky = make({
   position:"0 0 0",
   rotation:"0 0 0",
   
-  color: 'cyan',
+  color: 'limegreen',
   src: textures.grid.light,
   repeat: "15 5",
 })
@@ -31,23 +31,10 @@ const ground = make({
   material: "repeat: 120 120",
 })
 
-const totem = make({
-  type: 'cylinder',
-  'dynamic-body': '',
-  
-  radius: "0.25",
-  height: "0.5",
-
-  position:"1 1 1",
-  rotation:"-90 0 0",
-  
-  color: 'red',
-})
-
 export function addToWorld (...nodes) {
   return append(world, ...nodes)
 }
 
-addToWorld(ground, sky, totem)
+addToWorld(ground, sky)
 
 export default world
