@@ -1,6 +1,6 @@
 import { make } from './util.js'
 
-const leftHand = make({
+const leftHand = () => make({
   type: 'entity',
   id: 'leftController',
 
@@ -10,13 +10,13 @@ const leftHand = make({
   'sphere-collider': "objects: .throwable",
   'name': "left-hand",
   'haptics': "events: triggerdown; dur: 50; force: 0.25",
-  // 'teleport-controls': "cameraRig: #cameraRig; teleportOrigin: #head;",
+  'teleport-controls': "cameraRig: #cameraRig; teleportOrigin: #head;",
 
   grab: '',
   'super-hands': '',
 })
 
-const rightHand = make({
+const rightHand = () => make({
   type: 'entity',
   id: 'rightController',
 
@@ -26,7 +26,7 @@ const rightHand = make({
   'sphere-collider': "objects: .throwable",
   'name': "right-hand",
   'haptics': "events: triggerdown; dur: 50; force: 0.25",
-  // 'teleport-controls': "cameraRig: #cameraRig; teleportOrigin: #head;",
+  'teleport-controls': "cameraRig: #cameraRig; teleportOrigin: #head;",
 
   grab: '',
   'super-hands': '',

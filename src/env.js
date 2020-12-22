@@ -1,4 +1,5 @@
 import { make, append } from './util.js'
+import * as textures from './textures.js'
 
 const world = make({ type: 'entity', id: 'world' })
 
@@ -13,8 +14,8 @@ const sky = make({
   rotation:"0 0 0",
   
   color: 'cyan',
-  // src:"#sky",
-  // repeat: "5 5",
+  src: textures.grid.light,
+  repeat: "15 5",
 })
 
 const ground = make({
@@ -26,7 +27,8 @@ const ground = make({
   position:"0 0 0",
   rotation:"-90 0 0",
   
-  color: 'grey',
+  src: textures.grid.dark,
+  material: "repeat: 120 120",
 })
 
 const totem = make({
