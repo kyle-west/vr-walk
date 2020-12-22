@@ -8,7 +8,7 @@ export function addAssets (...nodes) {
 
 const images = {}
 export function ImageAsset (name) {
-  const img = images[name] || make({ type: 'img', src: `/assets/${name}`, id: name })
+  const img = images[name] || make({ type: 'img', src: `./assets/${name}`, id: name })
   if (!images[name]) {
     images[name] = img
     addAssets(img)
