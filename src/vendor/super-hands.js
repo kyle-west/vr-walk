@@ -1,0 +1,1 @@
+Found. Redirecting to /super-hands@3.0.1/dist/super-hands.min.js

@@ -1,0 +1,1 @@
+Found. Redirecting to /aframe-haptics-component@1.6.1/dist/aframe-haptics-component.min.js
