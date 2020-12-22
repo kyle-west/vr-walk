@@ -2,38 +2,32 @@ import './vendor/aframe.js'
 import './vendor/aframe-teleport-controls.js'
 import { make } from './util.js'
 
-const leftHand = () => make({
+const common = {
   type: 'entity',
-  id: 'leftController',
-
-  'static-body': "shape: sphere; sphereRadius: 0.005;",
-  'vive-controls': "hand: left",
-  'oculus-touch-controls': "hand: left",
-  'sphere-collider': "objects: .throwable",
-  'name': "left-hand",
-  'haptics': "events: triggerdown; dur: 50; force: 0.25",
-  'teleport-controls': "cameraRig: #cameraRig; teleportOrigin: #head; startEvents: teleportstart; endEvents: teleportend",
+  'teleport-controls': "cameraRig: #cameraRig; teleportOrigin: #head; startEvents: teleportstart; endEvents: teleportend; curveShootingSpeed: 10",
   'input-listen': '',
-
+  'haptics': "events: triggerdown; dur: 50; force: 0.25",
+  
+  'static-body': "shape: sphere; sphereRadius: 0.005;",
+  'sphere-collider': "objects: .throwable",
   grab: '',
   'super-hands': '',
+}
+
+const leftHand = () => make({
+  ...common,
+  id: 'leftController',
+  'vive-controls': "hand: left",
+  'oculus-touch-controls': "hand: left",
+  'name': "left-hand",
 })
 
 const rightHand = () => make({
-  type: 'entity',
+  ...common,
   id: 'rightController',
-
-  'static-body': "shape: sphere; sphereRadius: 0.005;",
   'vive-controls': "hand: right",
   'oculus-touch-controls': "hand: right",
-  'sphere-collider': "objects: .throwable",
   'name': "right-hand",
-  'haptics': "events: triggerdown; dur: 50; force: 0.25",
-  'teleport-controls': "cameraRig: #cameraRig; teleportOrigin: #head; startEvents: teleportstart; endEvents: teleportend",
-  'input-listen': '',
-
-  grab: '',
-  'super-hands': '',
 })
 
 AFRAME.registerComponent('input-listen', {

@@ -13,7 +13,7 @@ const sky = make({
   position:"0 0 0",
   rotation:"0 0 0",
   
-  color: 'magenta',
+  color: 'cyan',
   src: textures.grid.light,
   repeat: "15 5",
 })
