@@ -51,6 +51,11 @@ AFRAME.registerComponent('input-listen', {
     this.el.addEventListener('abuttonup', function (e) {
       this.emit('teleportend');
     });
+
+    //B-button Released 
+    this.el.addEventListener('bbuttonup', function (e) {
+      if (window.rotateEnv) window.rotateEnv()
+    });
   }
 });
 

@@ -12,6 +12,7 @@ const isAFrame = (type) => Boolean([
  'sphere',
  'sky',
  'plane',
+ 'light',
  // todo: enumerate this list
 ].includes(type))
 
@@ -54,9 +55,10 @@ export function make ({ type = 'entity', under, relative, ...attrs }, events = {
     const boolName = boolAttributes[name]
     if (boolName) {
       elem.setAttribute(boolName, '')
+    } else if (name === '_type') {
+      elem.setAttribute(name, 'type')
     } else if (name === 'position' && relative && parentElem) {
       const newPos = relativePos({ elem: parentElem, value })
-      console.log(`relative:position (${value}) --> (${newPos})`)
       elem.setAttribute(name, newPos)
     } else {
       elem.setAttribute(name, value)

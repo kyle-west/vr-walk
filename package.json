@@ -38,6 +38,7 @@
     "aframe-physics-system": "https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js",
     "super-hands": "https://unpkg.com/super-hands@3.0.1/dist/super-hands.min.js",
     "aframe-haptics-component": "https://unpkg.com/aframe-haptics-component@1.6.1/dist/aframe-haptics-component.min.js",
-    "aframe-teleport-controls": "https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"
+    "aframe-teleport-controls": "https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js",
+    "aframe-environment": "https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"
   }
 }

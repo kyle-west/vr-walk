@@ -11,6 +11,7 @@ const fatCats = [
   { url: catImg('fat'), text: 'fat cat 1' }, { url: catImg('fat'), text: 'fat cat 2' }, { url: catImg('fat'), text: 'fat cat 3' }, { url: catImg('fat'), text: 'fat cat 4' }, { url: catImg('fat'), text: 'fat cat 4' },{ url: catImg('fat'), text: 'fat cat 4' },{ url: catImg('fat'), text: 'fat cat 4' },{ url: catImg('fat'), text: 'fat cat 4' },{ url: catImg('fat'), text: 'fat cat 4' },
 ]
 
+let order = 0;
 function Picture ({ text = 'untitled', url }, offset = 0) {
   const frame = make({ type: 'box', 
     depth: "1.5",
@@ -18,9 +19,14 @@ function Picture ({ text = 'untitled', url }, offset = 0) {
     width: "0.01",
     position: `-0.13 1.5 -${1  + 2 * offset}`,
     src: url,
+    id: `frame${order++}`,
     // text
   })
   return frame
+}
+
+function Light (props) {
+  return make({ type: 'light', _type: "point", intensity: '0.1', ...props })
 }
 
 function Wall ({ name, images, ...rest }) {
@@ -35,10 +41,13 @@ function Wall ({ name, images, ...rest }) {
     position: `0 0 -${images.length}`,
     rotation: "0 0 0",
     color: 'grey',
+    src: ImageAsset('concrete.jpg')
   })
 
   images.forEach((img, idx) => {
-    group.appendChild(Picture(img, idx))
+    const pic = Picture(img, idx)
+    group.appendChild(pic)
+    group.appendChild(Light({ position: `0 2 -${2.5 * idx}`, target: '#' + pic.id }))
   });
 
   group.appendChild(wall)
