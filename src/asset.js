@@ -21,3 +21,19 @@ export function ImageAsset (name = '') {
   }
   return '#' + img.id
 }
+
+export const getImageDimensions = (name, { fixedWidth }) => {
+  const url = name.replace('#', '')
+  let { width, height } = images[url] || {}
+  if (fixedWidth && (width || height)) {
+    height = (fixedWidth / width) * height
+    width = fixedWidth
+  }
+  return [width, height]
+}
+
+export const onImageLoad = (name, cb) => {
+  const url = name.replace('#', '')
+  const img = images[url];
+  img.addEventListener('load', cb, { once : true })
+}

@@ -52,10 +52,10 @@ AFRAME.registerComponent('input-listen', {
       this.emit('teleportend');
     });
 
-    //B-button Released 
-    this.el.addEventListener('bbuttonup', function (e) {
-      if (window.rotateEnv) window.rotateEnv()
-    });
+    // //B-button Released 
+    // this.el.addEventListener('bbuttonup', function (e) {
+    //   if (window.rotateEnv) window.rotateEnv()
+    // });
   }
 });
 
