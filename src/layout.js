@@ -5,8 +5,8 @@ import { addToWorld } from './env.js'
 const catImg = (topic = '') => ImageAsset(`https://cataas.com/cat${topic ? `/${topic}` : ''}?cache_bust=${Math.random()}`)
 
 const catImages = [
-  { url: catImg('cute'), text: 'cute cat 1' }, { url: catImg('cute'), text: 'cute cat 2' }, { url: catImg('cute'), text: 'cute cat 3' }, { url: catImg('cute'), text: 'cute cat 4' }, { url: catImg('cute'), text: 'cute cat 5' }, { url: catImg('cute'), text: 'cute cat 5' },{ url: catImg('cute'), text: 'cute cat 5' },{ url: catImg('cute'), text: 'cute cat 5' },{ url: catImg('cute'), text: 'cute cat 5' },{ url: catImg('cute'), text: 'cute cat 5' },
-  { url: catImg(), text: 'fat cat 1' }, { url: catImg(), text: 'fat cat 2' }, { url: catImg(), text: 'fat cat 3' }, { url: catImg(), text: 'fat cat 4' }, { url: catImg(), text: 'fat cat 4' },{ url: catImg(), text: 'fat cat 4' },{ url: catImg(), text: 'fat cat 4' },{ url: catImg(), text: 'fat cat 4' },{ url: catImg(), text: 'fat cat 4' },
+  { url: catImg('cute'), text: 'cute cat 1' }, { url: catImg('cute'), text: 'cute cat 2' }, { url: catImg('cute'), text: 'cute cat 3' }, { url: catImg('cute'), text: 'cute cat 4' }, { url: catImg('cute'), text: 'cute cat 5' }, { url: catImg('cute'), text: 'cute cat 6' },{ url: catImg('cute'), text: 'cute cat 7' },{ url: catImg('cute'), text: 'cute cat 8' },{ url: catImg('cute'), text: 'cute cat 9' },{ url: catImg('cute'), text: 'cute cat 10' },
+  { url: catImg(), text: 'Just a simple cat 1' }, { url: catImg(), text: 'Just a simple cat with a really long name and has overflowing text. We need to make sure that we have good handling for this.' }, { url: catImg(), text: 'Just a simple cat 3' }, { url: catImg(), text: 'Just a simple cat 4' }, { url: catImg(), text: 'Just a simple cat 4' },{ url: catImg(), text: 'Just a simple cat 4' },{ url: catImg(), text: 'Just a simple cat 4' },{ url: catImg(), text: 'Just a simple cat 4' },{ url: catImg(), text: 'Just a simple cat 4' },
 ]
 
 let order = 0;
@@ -18,13 +18,26 @@ function Picture ({ text = 'untitled', url }, offset = 0) {
     position: `-0.13 1.5 -${1  + 2 * offset}`,
     src: url,
     id: `frame${order++}`,
-    // text
   })
+
+  const labelConfig = value => `value: ${value}; baseline: center; align: center; font: exo2bold;`
+  const label = make({ 
+    type: 'entity',
+    text: labelConfig('(Loading...)\n' + text),
+    scale: '2 2 2',
+    position: '0 1.25 0',
+    rotation: '0 -90 0',
+  })
+
   onImageLoad(url, () => {
-    const [ width, height ] = getImageDimensions(url, { fixedWidth: 1.5 })
+    const [ width, height ] = getImageDimensions(url, { fixedWidth: 1.5, maxHeight: 2 })
     frame.setAttribute('depth', width)
     frame.setAttribute('height', height)
+    label.setAttribute('text', labelConfig(text))
   })
+  
+  frame.appendChild(label)
+  
   return frame
 }
 
@@ -61,7 +74,6 @@ function Wall ({ images, ...rest }) {
 function generateWalls (images) {
   const h1 = [...images]
   const h2 = h1.splice(0, Math.floor(h1.length / 2))
-  console.log({h1, h2})
 
   addToWorld(
     Wall({ images: h1, rotation: '0 90 0', position: '3 0 -3' }),

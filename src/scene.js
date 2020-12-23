@@ -13,7 +13,7 @@ export function addToScene (...nodes) {
 
 addToScene(assets, environment, cameraRig)
 
-const camera = make({ id: 'head', type: 'entity', position: "0 1 0", camera: '', 'wasd-controls': '', 'look-controls': '' })
+const camera = make({ id: 'head', type: 'entity', position: "0 1.5 0", camera: '', 'wasd-controls': '', 'look-controls': '' })
 append(cameraRig, camera, leftHand(), rightHand())
 
 export default scene

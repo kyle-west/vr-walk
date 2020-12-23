@@ -22,12 +22,18 @@ export function ImageAsset (name = '') {
   return '#' + img.id
 }
 
-export const getImageDimensions = (name, { fixedWidth }) => {
+export const getImageDimensions = (name, { fixedWidth, maxHeight }) => {
   const url = name.replace('#', '')
   let { width, height } = images[url] || {}
   if (fixedWidth && (width || height)) {
-    height = (fixedWidth / width) * height
-    width = fixedWidth
+    const newHeight = (fixedWidth / width) * height
+    if (maxHeight && maxHeight < newHeight) {
+      width = (maxHeight / height) * width
+      height = maxHeight
+    } else {
+      height = newHeight
+      width = fixedWidth
+    }
   }
   return [width, height]
 }
