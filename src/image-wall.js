@@ -33,17 +33,17 @@ function Picture ({ text = 'untitled', url }, offset = 0) {
   return frame
 }
 
-function Light (props) {
-  return make({ type: 'light', _type: "point", intensity: '0.075', ...props })
+function Light ({ lightIntensity = 0.075, ...props }) {
+  return make({ type: 'light', _type: "point", intensity: lightIntensity, ...props })
 }
 
-export function ImageWall ({ images, ...rest }) {
+export function ImageWall ({ images, lightIntensity,  ...rest }) {
   const group = make({ type: 'entity', ...rest })
 
   const wall = make({
     type: 'box',
     'static-body': '',
-    depth: `${2 * images.length}`,
+    depth: `${2 * images.length + 0.5}`,
     height: "6",
     width: "0.25",
     position: `0 0 -${images.length}`,
@@ -55,7 +55,7 @@ export function ImageWall ({ images, ...rest }) {
   images.forEach((img, idx) => {
     const pic = Picture(img, idx)
     group.appendChild(pic)
-    group.appendChild(Light({ position: `-1.5 2.5 -${1 + 2 * idx}`, target: '#' + pic.id }))
+    group.appendChild(Light({ position: `-1.5 2.5 -${1 + 2 * idx}`, target: '#' + pic.id, lightIntensity }))
   });
 
   group.appendChild(wall)
