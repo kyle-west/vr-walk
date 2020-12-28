@@ -5,21 +5,21 @@ import environment from './env.js'
 import { generateImageWalls } from './layout.js'
 
 // Fire DOM event when camera position changes
-(() => {
-  let x,y,z;
+// (() => {
+//   let x,y,z;
 
-  AFRAME.registerComponent('camera-listener', {
-    tick: function () {
-      const cameraEl = this.el.sceneEl.camera.el;
-      const { x:dx, y:dy, z:dz } = cameraEl.getAttribute('position');
+//   AFRAME.registerComponent('camera-listener', {
+//     tick: function () {
+//       const cameraEl = this.el.sceneEl.camera.el;
+//       const { x:dx, y:dy, z:dz } = cameraEl.getAttribute('position');
       
-      if (x !== dx || y !== dy || z !== dz) {
-        x = dx; y = dy; z = dz;
-        document.dispatchEvent(new CustomEvent('player:position', { detail: { x,y,z }}))
-      }
-    }
-  });
-})()
+//       if (x !== dx || y !== dy || z !== dz) {
+//         x = dx; y = dy; z = dz;
+//         document.dispatchEvent(new CustomEvent('player:position', { detail: { x,y,z }}))
+//       }
+//     }
+//   });
+// })()
 
 
 const scene = make({ type: 'scene' })

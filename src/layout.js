@@ -44,8 +44,8 @@ export function generateImageWalls (images) {
     const south = ImageWall({ images: h3, rotation: '0 180 0', position: `3.13 0 -${h3.length * 2 + 3.13}`, lightIntensity })
     const north = ImageWall({ images: h4, rotation: '0 0 0', position: `-8.13 0 ${h4.length * 2 + 3.13}`, lightIntensity })
   
-    new Clipper(south, ({ x }) => x >= 3)
-    new Clipper(north, ({ x }) => x <= -8)
+    // new Clipper(south, ({ x }) => x >= 3)
+    // new Clipper(north, ({ x }) => x <= -8)
 
     addToWorld(north, south, east, west)
   }
