@@ -1,8 +1,10 @@
 import './vendor/aframe-environment.js'
 import { make, append } from './util.js'
+import config from './config.js'
 // import * as textures from './textures.js'
 
-const world = make({ type: 'entity', id: 'world', environment: 'preset: forest; fog: 0.2' });
+const environment = config.env || 'forest'
+const world = make({ type: 'entity', id: 'world', environment: `preset: ${environment}; fog: 0.2` });
 
 const envPresets = ['default', 'contact', 'egypt', 'checkerboard', 'forest', 'goaland', 'yavapai', 'goldmine', 'threetowers', 'poison', 'arches', 'tron', 'japan', 'dream', 'volcano', 'starry', 'osiris'];
 const setEnv = (env) => {

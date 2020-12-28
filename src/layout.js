@@ -1,5 +1,8 @@
 import { ImageWall } from './image-wall.js'
 import { addToWorld } from './env.js'
+import config from './config.js'
+
+const imgThreshold = config.imgThreshold || 18
 
 class Clipper {
   constructor (elem, visFn = () => false) {
@@ -23,7 +26,7 @@ class Clipper {
 
 
 export function generateImageWalls (images) {
-  if (images.length < 18) {
+  if (images.length < imgThreshold) {
     const lightIntensity = 0.075
     const h1 = [...images]
     const h2 = h1.splice(0, Math.floor(h1.length / 2))
