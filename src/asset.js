@@ -6,40 +6,52 @@ export function addAssets (...nodes) {
   return append(assets, ...nodes)
 }
 
-const images = {}
-export function ImageAsset (name = '') {
-  const external = name.startsWith('http')
-  const url = external ? name : `./assets/${name}`
-  const config = { type: 'img', src: url, id: name }
-  if (external) {
-    config.crossorigin = 'anonymous'
-  }
-  const img = images[name] || make(config)
-  if (!images[name]) {
-    images[name] = img
-    addAssets(img)
-  }
-  return '#' + img.id
-}
+function makeAssetLoader(tagname, srcKey = 'src') {
+  const items = {}
 
-export const getImageDimensions = (name, { fixedWidth, maxHeight }) => {
-  const url = name.replace('#', '')
-  let { width, height } = images[url] || {}
-  if (fixedWidth && (width || height)) {
-    const newHeight = (fixedWidth / width) * height
-    if (maxHeight && maxHeight < newHeight) {
-      width = (maxHeight / height) * width
-      height = maxHeight
-    } else {
-      height = newHeight
-      width = fixedWidth
+  function Asset (name = '', props = {}) {
+    const external = name.startsWith('http')
+    const url = external ? name : `./assets/${name}`
+    const config = { ...props, type: tagname, [srcKey]: url, id: name }
+    if (external) {
+      config.crossorigin = 'anonymous'
     }
+    const item = items[name] || make(config)
+    if (!items[name]) {
+      items[name] = item
+      addAssets(item)
+    }
+    return '#' + item.id
   }
-  return [width, height]
+
+  const getDimensions = (name, { fixedWidth, maxHeight }) => {
+    const url = name.replace('#', '')
+    let { width, height } = items[url] || {}
+    if (fixedWidth && (width || height)) {
+      const newHeight = (fixedWidth / width) * height
+      if (maxHeight && maxHeight < newHeight) {
+        width = (maxHeight / height) * width
+        height = maxHeight
+      } else {
+        height = newHeight
+        width = fixedWidth
+      }
+    }
+    return [width, height]
+  }
+
+  const onLoad = (name, cb) => {
+    const url = name.replace('#', '')
+    const item = items[url];
+    item.addEventListener('load', cb, { once : true })
+  }
+
+  return { items, Asset, getDimensions, onLoad }
 }
 
-export const onImageLoad = (name, cb) => {
-  const url = name.replace('#', '')
-  const img = images[url];
-  img.addEventListener('load', cb, { once : true })
-}
+
+const { Asset: ImageAsset, onLoad: onImageLoad, getDimensions: getImageDimensions } = makeAssetLoader('img')
+export { ImageAsset, onImageLoad, getImageDimensions }
+
+const { Asset: VideoAsset, onLoad: onVideoLoad, getDimensions: getVideoDimensions } = makeAssetLoader('video')
+export { VideoAsset, onVideoLoad, getVideoDimensions }
