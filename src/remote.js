@@ -2,7 +2,7 @@ import { make } from './util.js'
 
 window.remotes = window.remotes || {}
 
-export function Remote ({ videos, name, color = 'red',  ...rest }) {
+export function Remote ({ videos, name, color = 'black',  ...rest }) {
   const group = make({
     type: 'box',
     depth: `0.07`,

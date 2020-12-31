@@ -36,22 +36,6 @@ const rightHand = () => make({
 
 AFRAME.registerComponent('input-listen', {
   init: function () {
-    // // X-button 
-    // this.el.addEventListener('xbuttondown', function (e) {
-    //   this.emit('teleportstart');
-    // });
-    // this.el.addEventListener('xbuttonup', function (e) {
-    //   this.emit('teleportend');
-    // });
-    // // A-button 
-    // this.el.addEventListener('abuttondown', function (e) {
-    //   this.emit('teleportstart');
-    // });
-    // this.el.addEventListener('abuttonup', function (e) {
-    //   this.emit('teleportend');
-    // });
-
-
     // Thumbstick
     this.el.addEventListener('thumbstickmoved', function (e) {
       if (e.detail.y < -0.95) { console.log("UP"); 
@@ -66,10 +50,15 @@ AFRAME.registerComponent('input-listen', {
     });
 
 
-    // B-button 
-    this.el.addEventListener('bbuttonup', function (e) {
-      // if (window.rotateEnv) window.rotateEnv()
-      window.activeMedia.video.togglePlay()
+    // X-button
+    this.el.addEventListener('xbuttonup', function (e) {
+      if (window.remotes && window.remotes.video && window.remotes.video.active) {
+        if (window.remotes.video.hand === 'leftController') {
+          window.activeMedia.video.togglePlay()
+        } else {
+          log('VIDEO REMOTE: X Button only works when controller is in left hand')
+        }
+      }
     });
 
     // Y-button 
@@ -83,13 +72,24 @@ AFRAME.registerComponent('input-listen', {
       }
     });
 
-    // X-button
-    this.el.addEventListener('xbuttonup', function (e) {
+    // A-button
+    this.el.addEventListener('abuttonup', function (e) {
       if (window.remotes && window.remotes.video && window.remotes.video.active) {
-        if (window.remotes.video.hand === 'leftController') {
+        if (window.remotes.video.hand === 'rightController') {
           window.activeMedia.video.togglePlay()
         } else {
-          log('VIDEO REMOTE: X Button only works when controller is in left hand')
+          log('VIDEO REMOTE: A Button only works when controller is in right hand')
+        }
+      }
+    });
+
+    // B-button
+    this.el.addEventListener('bbuttonup', function (e) {
+      if (window.remotes && window.remotes.video && window.remotes.video.active) {
+        if (window.remotes.video.hand === 'rightController') {
+          window.activeMedia.video.togglePlay()
+        } else {
+          log('VIDEO REMOTE: X Button only works when controller is in right hand')
         }
       }
     });
