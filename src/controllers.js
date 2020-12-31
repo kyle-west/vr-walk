@@ -75,8 +75,22 @@ AFRAME.registerComponent('input-listen', {
     // Y-button 
     this.el.addEventListener('ybuttonup', function (e) {
       if (window.remotes && window.remotes.video && window.remotes.video.active) {
-        window.activeMedia.video.togglePlay()
-        log('ybuttonup event fired, remote held by:' + window.remotes.video.hand )
+        if (window.remotes.video.hand === 'leftController') {
+          window.activeMedia.video.togglePlay()
+        } else {
+          log('VIDEO REMOTE: Y Button only works when controller is in left hand')
+        }
+      }
+    });
+
+    // X-button
+    this.el.addEventListener('xbuttonup', function (e) {
+      if (window.remotes && window.remotes.video && window.remotes.video.active) {
+        if (window.remotes.video.hand === 'leftController') {
+          window.activeMedia.video.togglePlay()
+        } else {
+          log('VIDEO REMOTE: X Button only works when controller is in left hand')
+        }
       }
     });
   }
