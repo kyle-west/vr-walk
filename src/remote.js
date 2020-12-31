@@ -3,7 +3,7 @@ import { log } from './debug.js'
 
 window.remotes = window.remotes || {}
 
-export function Remote ({ videos, name, color = 'red',  ...rest }) {
+export function Remote ({ videos, name, color = 'magenta',  ...rest }) {
   const group = make({
     type: 'box',
     depth: `0.05`,
@@ -20,14 +20,14 @@ export function Remote ({ videos, name, color = 'red',  ...rest }) {
   })
 
   group.addEventListener('grab-start', (evt) => {
-    log('grab-start', evt.detail.hand.id)
-    window.remotes[name] = { active: true }
+    window.remotes[name] = { active: true, hand: evt.detail.hand.id }
     group.setAttribute('color', 'cyan')
+    log('grab-start', window.remotes)
   })
   group.addEventListener('grab-end', (evt) => {
-    log('grab-end', evt.detail.hand.id)
-    window.remotes[name] = { active: false }
+    window.remotes[name] = { active: false, hand: evt.detail.hand.id }
     group.setAttribute('color', 'blue')
+    log('grab-end', window.remotes)
   })
 
   return group

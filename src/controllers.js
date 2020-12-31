@@ -2,6 +2,7 @@ import './vendor/aframe.js'
 import './vendor/aframe-teleport-controls.js'
 import './vendor/super-hands.js'
 import { make } from './util.js'
+import { log } from './debug.js'
 
 window.controllers = window.controllers || {}
 
@@ -73,8 +74,9 @@ AFRAME.registerComponent('input-listen', {
 
     // Y-button 
     this.el.addEventListener('ybuttonup', function (e) {
-      if (window.remotes && window.remotes.video && window.remotes[name].active) {
+      if (window.remotes && window.remotes.video && window.remotes.video.active) {
         window.activeMedia.video.togglePlay()
+        log('ybuttonup event fired, remote held by:' + window.remotes.video.hand )
       }
     });
   }
