@@ -2,7 +2,7 @@ import { make, append } from './util.js'
 import { assets } from './asset.js'
 import { leftHand, rightHand } from './controllers.js'
 import environment from './env.js'
-import { generateImageWalls } from './layout.js'
+import { generateImageWalls, generateVideoViewer } from './layout.js'
 
 // Fire DOM event when camera position changes
 // (() => {
@@ -37,6 +37,9 @@ append(cameraRig, camera, leftHand(), rightHand())
 export class MediaViewer {
   showImages(images = []) {
     images && generateImageWalls(images)
+  }
+  showVideos(videos = []) {
+    videos && generateVideoViewer(videos)
   }
 }
 

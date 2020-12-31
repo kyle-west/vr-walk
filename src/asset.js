@@ -9,7 +9,7 @@ export function addAssets (...nodes) {
 function makeAssetLoader(tagname, srcKey = 'src') {
   const items = {}
 
-  function Asset (name = '', props = {}) {
+  function Asset (name = '', props = {}, returnID = true) {
     const external = name.startsWith('http')
     const url = external ? name : `./assets/${name}`
     const config = { ...props, type: tagname, [srcKey]: url, id: name }
@@ -21,7 +21,7 @@ function makeAssetLoader(tagname, srcKey = 'src') {
       items[name] = item
       addAssets(item)
     }
-    return '#' + item.id
+    return returnID ? '#' + item.id: item
   }
 
   const getDimensions = (name, { fixedWidth, maxHeight }) => {

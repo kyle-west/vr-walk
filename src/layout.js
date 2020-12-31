@@ -1,4 +1,5 @@
 import { ImageWall } from './image-wall.js'
+import { VideoViewer } from './video-viewer.js'
 import { addToWorld } from './env.js'
 import config from './config.js'
 
@@ -52,4 +53,9 @@ export function generateImageWalls (images) {
 
     addToWorld(north, south, east, west)
   }
+}
+
+export function generateVideoViewer (videos) {
+  window._videos = videos
+  addToWorld(VideoViewer({ videos, position: '12 0 -2'}))
 }
