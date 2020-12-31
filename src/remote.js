@@ -20,12 +20,12 @@ export function Remote ({ videos, name, color = 'red',  ...rest }) {
   })
 
   group.addEventListener('grab-start', (evt) => {
-    log('grab-start', evt.detail)
+    log('grab-start', evt.detail.hand.id)
     window.remotes[name] = { active: true }
     group.setAttribute('color', 'cyan')
   })
   group.addEventListener('grab-end', (evt) => {
-    log('grab-end', evt.detail.hand)
+    log('grab-end', evt.detail.hand.id)
     window.remotes[name] = { active: false }
     group.setAttribute('color', 'blue')
   })
