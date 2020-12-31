@@ -32,33 +32,46 @@ const rightHand = () => make({
 
 AFRAME.registerComponent('input-listen', {
   init: function () {
-    //X-button Pressed 
+    // X-button 
     this.el.addEventListener('xbuttondown', function (e) {
       this.emit('teleportstart');
     });
-
-    //X-button Released 
     this.el.addEventListener('xbuttonup', function (e) {
       this.emit('teleportend');
     });
 
-    //A-button Pressed 
+
+    // Thumbstick
+    this.el.addEventListener('thumbstickmoved', function (e) {
+      if (evt.detail.y < -0.95) { console.log("UP"); 
+        this.emit('teleportstart');
+      }
+      // if (evt.detail.y > 0.95) { console.log("DOWN"); }
+      // if (evt.detail.x < -0.95) { console.log("LEFT"); }
+      // if (evt.detail.x > 0.95) { console.log("RIGHT"); }
+    });
+    this.el.addEventListener('thumbstickup', function (e) {
+      this.emit('teleportend');
+    });
+
+
+    // A-button Pressed 
     this.el.addEventListener('abuttondown', function (e) {
       this.emit('teleportstart');
     });
-
-    //A-button Released 
     this.el.addEventListener('abuttonup', function (e) {
       this.emit('teleportend');
     });
 
-    //B-button Released 
+
+    // B-button 
     this.el.addEventListener('bbuttonup', function (e) {
       // if (window.rotateEnv) window.rotateEnv()
       window.activeMedia.video.togglePlay()
     });
+    
 
-    //Y-button Released 
+    // Y-button 
     this.el.addEventListener('ybuttonup', function (e) {
       window.activeMedia.video.togglePlay()
     });
