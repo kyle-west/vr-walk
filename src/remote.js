@@ -1,8 +1,12 @@
 import { make } from './util.js'
 
-export function Remote ({ videos, color = 'blue',  ...rest }) {
+export function Remote ({ videos, color = 'red',  ...rest }) {
   const group = make({
-    type: 'entity',
+    type: 'box',
+    depth: `0.1`,
+    height: "0.02",
+    width: "0.3",
+    color,
     ...rest,
     'dynamic-body': '',
     hoverable: '', 
@@ -12,16 +16,6 @@ export function Remote ({ videos, color = 'blue',  ...rest }) {
     class: "throwable"
   })
 
-  const body = make({
-    type: 'box',
-    depth: `0.1`,
-    height: "0.02",
-    width: "0.3",
-    position: `0 0 0`,
-    rotation: "0 0 0",
-    color,
-  })
-
   group.addEventListener('grab-start', (evt) => {
     window.activeMedia.video.play()
   })
@@ -29,6 +23,5 @@ export function Remote ({ videos, color = 'blue',  ...rest }) {
     window.activeMedia.video.pause()
   })
 
-  group.appendChild(body)
   return group
 }
