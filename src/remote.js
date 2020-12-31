@@ -1,8 +1,9 @@
 import { make } from './util.js'
 import { log } from './debug.js'
 
-let order = 0;
-export function Remote ({ videos, name = `remote${order++}`, color = 'blue',  ...rest }) {
+window.remotes = window.remotes || {}
+
+export function Remote ({ videos, name, color = 'red',  ...rest }) {
   const group = make({
     type: 'box',
     depth: `0.05`,
@@ -20,12 +21,12 @@ export function Remote ({ videos, name = `remote${order++}`, color = 'blue',  ..
 
   group.addEventListener('grab-start', (evt) => {
     log('grab-start', evt.detail)
-    log('grab-start', evt.detail.hand)
+    window.remotes[name] = { active: true }
     group.setAttribute('color', 'cyan')
   })
   group.addEventListener('grab-end', (evt) => {
-    log('grab-end', evt.detail)
     log('grab-end', evt.detail.hand)
+    window.remotes[name] = { active: false }
     group.setAttribute('color', 'blue')
   })
 

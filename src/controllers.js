@@ -71,10 +71,12 @@ AFRAME.registerComponent('input-listen', {
       window.activeMedia.video.togglePlay()
     });
 
-    // // Y-button 
-    // this.el.addEventListener('ybuttonup', function (e) {
-    //   window.activeMedia.video.togglePlay()
-    // });
+    // Y-button 
+    this.el.addEventListener('ybuttonup', function (e) {
+      if (window.remotes && window.remotes.video && window.remotes[name].active) {
+        window.activeMedia.video.togglePlay()
+      }
+    });
   }
 });
 

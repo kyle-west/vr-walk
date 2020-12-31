@@ -58,5 +58,5 @@ export function generateImageWalls (images) {
 
 export function generateVideoViewer (videos) {
   window._videos = videos
-  addToWorld(VideoViewer({ videos, position: '12 0 -2'}), Remote({position: '0 1 0'}))
+  addToWorld(VideoViewer({ videos, position: '12 0 -2'}), Remote({position: '0 1 0', name: 'video'}))
 }
