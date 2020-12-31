@@ -1,7 +1,16 @@
 import { make } from './util.js'
 
 export function Remote ({ videos, color = 'blue',  ...rest }) {
-  const group = make({ type: 'entity', ...rest, 'dynamic-body': '', grabbable: '', class: "throwable" })
+  const group = make({
+    type: 'entity',
+    ...rest,
+    'dynamic-body': '',
+    hoverable: '', 
+    draggable: '', 
+    dropppable: '',
+    grabbable: '',
+    class: "throwable"
+  })
 
   const body = make({
     type: 'box',
