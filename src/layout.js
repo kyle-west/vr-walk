@@ -1,6 +1,7 @@
 import { ImageWall } from './image-wall.js'
 import { VideoViewer } from './video-viewer.js'
 import { addToWorld } from './env.js'
+import { Remote } from './remote.js'
 import config from './config.js'
 
 const imgThreshold = config.imgThreshold || 18
@@ -57,5 +58,5 @@ export function generateImageWalls (images) {
 
 export function generateVideoViewer (videos) {
   window._videos = videos
-  addToWorld(VideoViewer({ videos, position: '12 0 -2'}))
+  addToWorld(VideoViewer({ videos, position: '12 0 -2'}), Remote({position: '0 1 0'}))
 }

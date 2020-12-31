@@ -1,6 +1,9 @@
 import './vendor/aframe.js'
 import './vendor/aframe-teleport-controls.js'
+import './vendor/super-hands.js'
 import { make } from './util.js'
+
+window.controllers = window.controllers || {}
 
 const common = {
   type: 'entity',
@@ -32,13 +35,20 @@ const rightHand = () => make({
 
 AFRAME.registerComponent('input-listen', {
   init: function () {
-    // X-button 
-    this.el.addEventListener('xbuttondown', function (e) {
-      this.emit('teleportstart');
-    });
-    this.el.addEventListener('xbuttonup', function (e) {
-      this.emit('teleportend');
-    });
+    // // X-button 
+    // this.el.addEventListener('xbuttondown', function (e) {
+    //   this.emit('teleportstart');
+    // });
+    // this.el.addEventListener('xbuttonup', function (e) {
+    //   this.emit('teleportend');
+    // });
+    // // A-button 
+    // this.el.addEventListener('abuttondown', function (e) {
+    //   this.emit('teleportstart');
+    // });
+    // this.el.addEventListener('abuttonup', function (e) {
+    //   this.emit('teleportend');
+    // });
 
 
     // Thumbstick
@@ -55,26 +65,16 @@ AFRAME.registerComponent('input-listen', {
     });
 
 
-    // A-button Pressed 
-    this.el.addEventListener('abuttondown', function (e) {
-      this.emit('teleportstart');
-    });
-    this.el.addEventListener('abuttonup', function (e) {
-      this.emit('teleportend');
-    });
-
-
     // B-button 
     this.el.addEventListener('bbuttonup', function (e) {
       // if (window.rotateEnv) window.rotateEnv()
       window.activeMedia.video.togglePlay()
     });
-    
 
-    // Y-button 
-    this.el.addEventListener('ybuttonup', function (e) {
-      window.activeMedia.video.togglePlay()
-    });
+    // // Y-button 
+    // this.el.addEventListener('ybuttonup', function (e) {
+    //   window.activeMedia.video.togglePlay()
+    // });
   }
 });
 

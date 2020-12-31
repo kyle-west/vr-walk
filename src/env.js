@@ -37,23 +37,25 @@ window.rotateEnv = rotateEnv;
 //   repeat: "15 5",
 // })
 
-// const ground = make({
-//   type: 'plane',
-//   'static-body': '',
-//   width: '60',
-//   height: '60',
+const ground = make({
+  type: 'plane',
+  'static-body': '',
+  width: '60',
+  height: '60',
 
-//   position:"0 0 0",
-//   rotation:"-90 0 0",
-  
-//   src: textures.grid.dark,
-//   material: "repeat: 120 120",
-// })
+  position:"0 -0.05 0",
+  rotation:"-90 0 0",
+
+  color: 'transparent'
+  // src: textures.grid.dark,
+  // material: "repeat: 120 120",
+})
 
 export function addToWorld (...nodes) {
   return append(world, ...nodes)
 }
 
 // addToWorld(ground, sky)
+addToWorld(ground)
 
 export default world
