@@ -43,14 +43,14 @@ AFRAME.registerComponent('input-listen', {
 
     // Thumbstick
     this.el.addEventListener('thumbstickmoved', function (e) {
-      if (evt.detail.y < -0.95) { console.log("UP"); 
+      if (e.detail.y < -0.95) { console.log("UP"); 
         this.emit('teleportstart');
       }
-      // if (evt.detail.y > 0.95) { console.log("DOWN"); }
-      // if (evt.detail.x < -0.95) { console.log("LEFT"); }
-      // if (evt.detail.x > 0.95) { console.log("RIGHT"); }
+      // if (e.detail.y > 0.95) { console.log("DOWN"); }
+      // if (e.detail.x < -0.95) { console.log("LEFT"); }
+      // if (e.detail.x > 0.95) { console.log("RIGHT"); }
     });
-    this.el.addEventListener('thumbstickup', function (e) {
+    this.el.addEventListener('thumbsticktouchend', function (e) {
       this.emit('teleportend');
     });
 
