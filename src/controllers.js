@@ -91,10 +91,8 @@ AFRAME.registerComponent('input-listen', {
         this.emit('teleportstart'); 
       }
       
-
       if (direction) {
         lastDirection = direction
-        log(`direction: ${direction}`)
       }
     });
     this.el.addEventListener('thumbsticktouchend', function (e) {
@@ -107,7 +105,7 @@ AFRAME.registerComponent('input-listen', {
         window.remotes.video.actions.previous()
       }
 
-      log(`lastDirection: ${lastDirection}`)
+      log(`lastDirection: ${lastDirection}, holdingRemote('video'): ${holdingRemote('video')}`)
     });
 
 

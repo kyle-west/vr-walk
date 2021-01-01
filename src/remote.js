@@ -2,7 +2,7 @@ import { make } from './util.js'
 
 window.remotes = window.remotes || {}
 
-export function Remote ({ name, color = 'black', btnColor = 'blue', actions, ...rest }) {
+export function Remote ({ name, color = 'white', btnColor = 'blue', actions, ...rest }) {
   const config = {
     type: 'box',
     id: `remote_${name}`,
