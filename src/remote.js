@@ -3,7 +3,7 @@ import { log } from './debug.js'
 
 window.remotes = window.remotes || {}
 
-export function Remote ({ name, color = 'red',  ...rest }) {
+export function Remote ({ name, color = 'blue',  ...rest }) {
   const config = {
     type: 'box',
     id: `remote_${name}`,

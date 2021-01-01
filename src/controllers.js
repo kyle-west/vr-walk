@@ -8,37 +8,6 @@ import { make } from './util.js'
 
 window.controllers = window.controllers || {}
 
-function Wrapper(hand, side) {
-  let substituteMesh
-  const clearMesh = () => substituteMesh && hand.contains(substituteMesh) && hand.removeChild(substituteMesh)
-
-  return {
-    hand,
-    id: hand.id,
-    restoreMesh: () => {
-      clearMesh()
-      const config = {
-        hand: side,
-        model: true
-      }
-      hand.setAttribute('vive-controls', config);
-      hand.setAttribute('oculus-touch-controls', config);
-    },
-    replaceMesh: (newMesh) => {
-      const config = {
-        hand: side,
-        model: false
-      }
-      clearMesh()
-      substituteMesh = newMesh
-      hand.setAttribute('vive-controls', config);
-      hand.setAttribute('oculus-touch-controls', config);
-    },
-  }
-}
-
-// ==================================================================================
-
 const common = {
   type: 'entity',
   'teleport-controls': "cameraRig: #cameraRig; teleportOrigin: #head; startEvents: teleportstart; endEvents: teleportend; curveShootingSpeed: 10",
@@ -49,6 +18,37 @@ const common = {
   'sphere-collider': "objects: .throwable",
   grab: '',
   'super-hands': '',
+}
+
+function Wrapper(hand, side) {
+  let substituteMesh
+  const clearMesh = () => substituteMesh && hand.contains(substituteMesh) && hand.removeChild(substituteMesh)
+
+  return {
+    hand,
+    id: hand.id,
+    restoreMesh: () => {
+      clearMesh()
+      if (side = 'right') {
+        hand.components['oculus-touch-controls'].data.model = true
+      } else {
+        const config = `hand: ${side}; model: true;`
+        hand.setAttribute('vive-controls', config);
+        hand.setAttribute('oculus-touch-controls', config);
+      }
+    },
+    replaceMesh: (newMesh) => {
+      clearMesh()
+      substituteMesh = newMesh
+      if (side = 'right') {
+        hand.components['oculus-touch-controls'].data.model = false
+      } else {
+        const config = `hand: ${side}; model: false;`
+        hand.setAttribute('vive-controls', config);
+        hand.setAttribute('oculus-touch-controls', config);
+      }
+    },
+  }
 }
 
 const leftHand = () => {
