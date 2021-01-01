@@ -29,24 +29,12 @@ function Wrapper(hand, side) {
     id: hand.id,
     restoreMesh: () => {
       clearMesh()
-      if (side = 'right') {
-        hand.components['oculus-touch-controls'].data.model = true
-      } else {
-        const config = `hand: ${side}; model: true;`
-        hand.setAttribute('vive-controls', config);
-        hand.setAttribute('oculus-touch-controls', config);
-      }
+      hand.components['gltf-model'].model.visible = true
     },
     replaceMesh: (newMesh) => {
       clearMesh()
       substituteMesh = newMesh
-      if (side = 'right') {
-        hand.components['oculus-touch-controls'].data.model = false
-      } else {
-        const config = `hand: ${side}; model: false;`
-        hand.setAttribute('vive-controls', config);
-        hand.setAttribute('oculus-touch-controls', config);
-      }
+      hand.components['gltf-model'].model.visible = false
     },
   }
 }
