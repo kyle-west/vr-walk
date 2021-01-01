@@ -2,6 +2,7 @@ import './vendor/aframe.js'
 import './vendor/aframe-teleport-controls.js'
 import './vendor/super-hands.js'
 import { make } from './util.js'
+import { log } from './debug.js'
 
 
 // ==================================================================================
@@ -89,8 +90,12 @@ AFRAME.registerComponent('input-listen', {
       if (direction === 'up') {
         this.emit('teleportstart'); 
       }
+      
 
-      if (direction) lastDirection = direction
+      if (direction) {
+        lastDirection = direction
+        log(`direction: ${direction}`)
+      }
     });
     this.el.addEventListener('thumbsticktouchend', function (e) {
       this.emit('teleportend');
@@ -101,6 +106,8 @@ AFRAME.registerComponent('input-listen', {
       if (lastDirection === 'left' && holdingRemote('video')) {
         window.remotes.video.actions.previous()
       }
+
+      log(`lastDirection: ${lastDirection}`)
     });
 
 
