@@ -1,3 +1,4 @@
+import { debounce } from './util.js'
 import { ImageWall } from './image-wall.js'
 import { VideoViewer } from './video-viewer.js'
 import { addToWorld } from './env.js'
@@ -60,28 +61,20 @@ export function generateVideoViewer (videos) {
   addToWorld(
     VideoViewer({ videos, position: '12 0 -2'}), 
     Remote({position: '6 1 -2', name: 'video', actions: {
-      next: () => {
+      next: debounce(() => {
         if (window.activeMedia && window.activeMedia.video) {
-          const { data, select, play } = window.activeMedia.video
-          let idx = videos.findIndex(vid => vid === data)
-          if (idx >= videos.length - 1) idx = -1
-          const video = videos[idx + 1]
-          console.log(idx + 1, video)
-          select(video)
+          const { getNext, select, play } = window.activeMedia.video
+          select(getNext())
           play()
         }
-      }, 
-      previous: () => {
+      }), 
+      previous: debounce(() => {
         if (window.activeMedia && window.activeMedia.video) {
-          const { data, select, play } = window.activeMedia.video
-          let idx = videos.findIndex(vid => vid === data)
-          if (idx - 1 < 0) idx = videos.length
-          const video = videos[idx - 1]
-          console.log(idx - 1, video)
-          select(video)
+          const { getPrev, select, play } = window.activeMedia.video
+          select(getPrev())
           play()
         }
-      } 
+      }) 
     }})
     // Remote({position: '0 1.3 -0.5', name: 'video'})
   )

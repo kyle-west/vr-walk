@@ -38,6 +38,18 @@ export function VideoViewer ({ videos, lightIntensity,  ...rest }) {
 
       window.activeMedia.video.controlElem = vidElem
     },
+    getNext: () => {
+      const { data } = window.activeMedia.video
+      let idx = videos.findIndex(vid => vid === data)
+      if (idx >= videos.length - 1) idx = -1
+      return videos[idx + 1]
+    },
+    getPrev: () => {
+      const { data } = window.activeMedia.video
+      let idx = videos.findIndex(vid => vid === data)
+      if (idx - 1 < 0) idx = videos.length
+      return videos[idx - 1]
+    },
     play: () => {
       const ctrl = window.activeMedia.video.controlElem
       if (ctrl) {
