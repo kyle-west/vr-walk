@@ -67,7 +67,7 @@ const rightHand = () => {
 // ==================================================================================
 
 function holdingRemote(remoteName, controller) {
-  let beingHeld = window.remotes && window.remotes[remoteName] && window.remotes[remoteName].active
+  let beingHeld = window.remotes && window.remotes[remoteName] && (window.remotes[remoteName].active || window.remotes[remoteName].wasRecentlyActive)
   if (beingHeld && controller) {
     beingHeld &&= (window.remotes[remoteName].hand === controller)
   }

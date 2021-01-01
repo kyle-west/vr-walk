@@ -3,7 +3,7 @@ import { log } from './debug.js'
 
 window.remotes = window.remotes || {}
 
-export function Remote ({ name, color = 'red', btnColor = 'blue', actions, ...rest }) {
+export function Remote ({ name, color = 'blue', btnColor = 'blue', actions, ...rest }) {
   const config = {
     type: 'box',
     id: `remote_${name}`,
@@ -35,13 +35,18 @@ export function Remote ({ name, color = 'red', btnColor = 'blue', actions, ...re
     const hand = evt.detail.hand.id
     window.remotes[name] = { active: true, hand, actions }
     hand && window.controllers[hand].hideMesh()
-    log(`<${name}>::grab-start[${hand}] active=false`)
+    log(`<${name}>::grab-start[${hand}] active=true`)
   })
   remote.addEventListener('grab-end', (evt) => {
     const hand = evt.detail.hand.id
-    window.remotes[name] = { active: false, hand, actions }
+    const wasRecentlyActive = window.remotes[name].active
+    window.remotes[name] = { active: false, hand, actions, wasRecentlyActive }
+    setTimeout(() => { 
+      window.remotes[name].wasRecentlyActive = false
+      log(`<${name}>::grab-end[${hand}] wasRecentlyActive=${window.remotes[name].wasRecentlyActive}`)
+    }, 500)
     hand && window.controllers[hand].restoreMesh()
-    log(`<${name}>::grab-end[${hand}] active=false`)
+    log(`<${name}>::grab-end[${hand}] active=false wasRecentlyActive=${window.remotes[name].wasRecentlyActive}`)
   })
   
   remote.appendChild(topBtn)
