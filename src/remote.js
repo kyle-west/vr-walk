@@ -2,7 +2,7 @@ import { make } from './util.js'
 
 window.remotes = window.remotes || {}
 
-export function Remote ({ name, color = 'black', btnColor = 'blue',  ...rest }) {
+export function Remote ({ name, color = 'white', btnColor = 'blue', actions, ...rest }) {
   const config = {
     type: 'box',
     id: `remote_${name}`,
@@ -28,14 +28,16 @@ export function Remote ({ name, color = 'black', btnColor = 'blue',  ...rest }) 
     color: btnColor,
   })
   
+  window.remotes[name] = { active: false, actions }
+
   remote.addEventListener('grab-start', (evt) => {
     const hand = evt.detail.hand.id
-    window.remotes[name] = { active: true, hand }
+    window.remotes[name] = { active: true, hand, actions }
     hand && window.controllers[hand].hideMesh()
   })
   remote.addEventListener('grab-end', (evt) => {
     const hand = evt.detail.hand.id
-    window.remotes[name] = { active: false, hand }
+    window.remotes[name] = { active: false, hand, actions }
     hand && window.controllers[hand].restoreMesh()
   })
   

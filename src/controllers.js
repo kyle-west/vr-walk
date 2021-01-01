@@ -78,16 +78,29 @@ function holdingRemote(remoteName, controller) {
 AFRAME.registerComponent('input-listen', {
   init: function () {
     // Thumbstick
+    let lastDirection 
     this.el.addEventListener('thumbstickmoved', function (e) {
-      if (e.detail.y < -0.95) { console.log("UP"); 
-        this.emit('teleportstart');
+      let direction
+      if (e.detail.y < -0.95) { direction = 'up'}
+      if (e.detail.y > 0.95)  { direction = 'down' }
+      if (e.detail.x < -0.95) { direction = 'left' }
+      if (e.detail.x > 0.95)  { direction = 'right' }
+
+      if (direction === 'up') {
+        this.emit('teleportstart'); 
       }
-      // if (e.detail.y > 0.95) { console.log("DOWN"); }
-      // if (e.detail.x < -0.95) { console.log("LEFT"); }
-      // if (e.detail.x > 0.95) { console.log("RIGHT"); }
+
+      if (direction) lastDirection = direction
     });
     this.el.addEventListener('thumbsticktouchend', function (e) {
       this.emit('teleportend');
+
+      if (lastDirection === 'right' && holdingRemote('video')) {
+        window.remotes.video.actions.next()
+      }
+      if (lastDirection === 'left' && holdingRemote('video')) {
+        window.remotes.video.actions.previous()
+      }
     });
 
 

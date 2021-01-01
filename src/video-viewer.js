@@ -61,9 +61,6 @@ export function VideoViewer ({ videos, lightIntensity,  ...rest }) {
     },
   }
 
-  // Test this out
-  window.activeMedia.video.select(window._videos[0])
-
   group.appendChild(wall)
   group.appendChild(videoScreen)
   return group
