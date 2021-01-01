@@ -3,7 +3,39 @@ import './vendor/aframe-teleport-controls.js'
 import './vendor/super-hands.js'
 import { make } from './util.js'
 
+
+// ==================================================================================
+
 window.controllers = window.controllers || {}
+
+function Wrapper(hand, side) {
+  let substituteMesh
+  const clearMesh = () => substituteMesh && hand.contains(substituteMesh) && hand.removeChild(substituteMesh)
+
+  return {
+    hand,
+    id: hand.id,
+    restoreMesh: () => {
+      clearMesh()
+      const config = {
+        hand: side,
+        model: true
+      }
+      hand.setAttribute('vive-controls', config);
+      hand.setAttribute('oculus-touch-controls', config);
+    },
+    replaceMesh: (newMesh) => {
+      const config = {
+        hand: side,
+        model: false
+      }
+      clearMesh()
+      substituteMesh = newMesh
+      hand.setAttribute('vive-controls', config);
+      hand.setAttribute('oculus-touch-controls', config);
+    },
+  }
+}
 
 // ==================================================================================
 
@@ -19,21 +51,29 @@ const common = {
   'super-hands': '',
 }
 
-const leftHand = () => make({
-  ...common,
-  id: 'leftController',
-  'vive-controls': "hand: left",
-  'oculus-touch-controls': "hand: left",
-  'name': "left-hand",
-})
+const leftHand = () => {
+  const hand = make({
+    ...common,
+    id: 'leftController',
+    'vive-controls': "hand: left",
+    'oculus-touch-controls': "hand: left",
+    'name': "left-hand",
+  })
+  window.controllers.leftController = Wrapper(hand, 'left')
+  return hand
+}
 
-const rightHand = () => make({
-  ...common,
-  id: 'rightController',
-  'vive-controls': "hand: right",
-  'oculus-touch-controls': "hand: right",
-  'name': "right-hand",
-})
+const rightHand = () => {
+  const hand = make({
+    ...common,
+    id: 'rightController',
+    'vive-controls': "hand: right",
+    'oculus-touch-controls': "hand: right",
+    'name': "right-hand",
+  })
+  window.controllers.rightController = Wrapper(hand, 'right')
+  return hand
+}
 
 // ==================================================================================
 
