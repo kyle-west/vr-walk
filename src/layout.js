@@ -69,7 +69,7 @@ export function generateVideoViewer (videos) {
           if (window.activeMedia && window.activeMedia.video) {
             const { getNext, select, play, getQueueText } = window.activeMedia.video
             select(getNext())
-            window.remotes.video.actions.updateText(getQueueText())
+            window.remotes.video.actions.updateText(getQueueText(), true)
             play()
           }
         }), 
@@ -77,7 +77,7 @@ export function generateVideoViewer (videos) {
           if (window.activeMedia && window.activeMedia.video) {
             const { getPrev, select, play, getQueueText } = window.activeMedia.video
             select(getPrev())
-            window.remotes.video.actions.updateText(getQueueText())
+            window.remotes.video.actions.updateText(getQueueText(), true)
             play()
           }
         }) 
