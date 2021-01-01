@@ -50,6 +50,14 @@ export function VideoViewer ({ videos, lightIntensity,  ...rest }) {
       if (idx - 1 < 0) idx = videos.length
       return videos[idx - 1]
     },
+    getQueueText: () => {
+      let main, left, right;
+      // TODO: this does not correctly handle empty videos array
+      main = window.activeMedia.video.data && window.activeMedia.video.data.title
+      left = window.activeMedia.video.getPrev().title
+      right = window.activeMedia.video.getNext().title
+      return { main, left, right }
+    },
     play: () => {
       const ctrl = window.activeMedia.video.controlElem
       if (ctrl) {

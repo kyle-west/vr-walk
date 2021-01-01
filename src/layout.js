@@ -60,22 +60,28 @@ export function generateImageWalls (images) {
 export function generateVideoViewer (videos) {
   addToWorld(
     VideoViewer({ videos, position: '12 0 -2'}), 
-    Remote({position: '6 1 -2', name: 'video', actions: {
-      next: debounce(() => {
-        if (window.activeMedia && window.activeMedia.video) {
-          const { getNext, select, play } = window.activeMedia.video
-          select(getNext())
-          play()
-        }
-      }), 
-      previous: debounce(() => {
-        if (window.activeMedia && window.activeMedia.video) {
-          const { getPrev, select, play } = window.activeMedia.video
-          select(getPrev())
-          play()
-        }
-      }) 
-    }})
-    // Remote({position: '0 1.3 -0.5', name: 'video'})
+    Remote({
+      name: 'video', 
+      position: '6 1 -2',
+      // position: '0 1.3 -0.5',
+      actions: {
+        next: debounce(() => {
+          if (window.activeMedia && window.activeMedia.video) {
+            const { getNext, select, play, getQueueText } = window.activeMedia.video
+            select(getNext())
+            window.remotes.video.actions.updateText(getQueueText())
+            play()
+          }
+        }), 
+        previous: debounce(() => {
+          if (window.activeMedia && window.activeMedia.video) {
+            const { getPrev, select, play, getQueueText } = window.activeMedia.video
+            select(getPrev())
+            window.remotes.video.actions.updateText(getQueueText())
+            play()
+          }
+        }) 
+      }
+    })
   )
 }

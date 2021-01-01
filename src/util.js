@@ -9,6 +9,8 @@ const isAFrame = (type) => Boolean([
  'entity',
  'box',
  'cylinder',
+ 'cone',
+ 'triangle',
  'sphere',
  'sky',
  'plane',
