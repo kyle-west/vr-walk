@@ -21,19 +21,19 @@ const common = {
 }
 
 function Wrapper(hand, side) {
-  let substituteMesh
-  const clearMesh = () => substituteMesh && hand.contains(substituteMesh) && hand.removeChild(substituteMesh)
+  // let substituteMesh
+  // const clearMesh = () => substituteMesh && hand.contains(substituteMesh) && hand.removeChild(substituteMesh)
 
   return {
     hand,
     id: hand.id,
     restoreMesh: () => {
-      clearMesh()
+      // clearMesh()
       hand.components['gltf-model'].model.visible = true
     },
-    replaceMesh: (newMesh) => {
-      clearMesh()
-      substituteMesh = newMesh
+    hideMesh: (newMesh) => {
+      // clearMesh()
+      // substituteMesh = newMesh
       hand.components['gltf-model'].model.visible = false
     },
   }
