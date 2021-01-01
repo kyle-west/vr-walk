@@ -2,9 +2,10 @@ import './vendor/aframe.js'
 import './vendor/aframe-teleport-controls.js'
 import './vendor/super-hands.js'
 import { make } from './util.js'
-import { log } from './debug.js'
 
 window.controllers = window.controllers || {}
+
+// ==================================================================================
 
 const common = {
   type: 'entity',
@@ -34,6 +35,18 @@ const rightHand = () => make({
   'name': "right-hand",
 })
 
+// ==================================================================================
+
+function holdingRemote(remoteName, controller) {
+  let beingHeld = window.remotes && window.remotes[remoteName] && window.remotes[remoteName].active
+  if (beingHeld && controller) {
+    beingHeld &&= (window.remotes[remoteName].hand === controller)
+  }
+  return beingHeld
+}
+
+// ==================================================================================
+
 AFRAME.registerComponent('input-listen', {
   init: function () {
     // Thumbstick
@@ -52,45 +65,29 @@ AFRAME.registerComponent('input-listen', {
 
     // X-button
     this.el.addEventListener('xbuttonup', function (e) {
-      if (window.remotes && window.remotes.video && window.remotes.video.active) {
-        if (window.remotes.video.hand === 'leftController') {
-          window.activeMedia.video.togglePlay()
-        } else {
-          log('VIDEO REMOTE: X Button only works when controller is in left hand')
-        }
+      if (holdingRemote('video', 'leftController')) {
+        window.activeMedia.video.togglePlay()
       }
     });
 
     // Y-button 
     this.el.addEventListener('ybuttonup', function (e) {
-      if (window.remotes && window.remotes.video && window.remotes.video.active) {
-        if (window.remotes.video.hand === 'leftController') {
-          window.activeMedia.video.togglePlay()
-        } else {
-          log('VIDEO REMOTE: Y Button only works when controller is in left hand')
-        }
+      if (holdingRemote('video', 'leftController')) {
+        window.activeMedia.video.togglePlay()
       }
     });
 
     // A-button
     this.el.addEventListener('abuttonup', function (e) {
-      if (window.remotes && window.remotes.video && window.remotes.video.active) {
-        if (window.remotes.video.hand === 'rightController') {
-          window.activeMedia.video.togglePlay()
-        } else {
-          log('VIDEO REMOTE: A Button only works when controller is in right hand')
-        }
+      if (holdingRemote('video', 'rightController')) {
+        window.activeMedia.video.togglePlay()
       }
     });
 
     // B-button
     this.el.addEventListener('bbuttonup', function (e) {
-      if (window.remotes && window.remotes.video && window.remotes.video.active) {
-        if (window.remotes.video.hand === 'rightController') {
-          window.activeMedia.video.togglePlay()
-        } else {
-          log('VIDEO REMOTE: X Button only works when controller is in right hand')
-        }
+      if (holdingRemote('video', 'rightController')) {
+        window.activeMedia.video.togglePlay()
       }
     });
   }
