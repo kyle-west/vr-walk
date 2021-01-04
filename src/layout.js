@@ -98,7 +98,7 @@ export function generateRadio (sounds) {
     Radio({ sounds, position: '-12 0 2', rotation: '0 200 0'}), 
     Remote({
       name: 'radio',
-      color: 'white',
+      color: 'grey',
       position: '-11 2 1.3',
       rotation: '0 180 0',
       actions: {

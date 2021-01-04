@@ -105,7 +105,14 @@ AFRAME.registerComponent('input-listen', {
         window.remotes.video.actions.previous()
       }
 
-      log(`lastDirection: ${lastDirection}, holdingRemote('video'): ${holdingRemote('video')}`)
+      if (lastDirection === 'right' && holdingRemote('radio')) {
+        window.remotes.radio.actions.next()
+      }
+      if (lastDirection === 'left' && holdingRemote('radio')) {
+        window.remotes.radio.actions.previous()
+      }
+
+      log(`lastDirection: ${lastDirection}, holdingRemote('radio'): ${holdingRemote('radio')}, holdingRemote('video'): ${holdingRemote('video')}`)
     });
 
 
@@ -114,12 +121,18 @@ AFRAME.registerComponent('input-listen', {
       if (holdingRemote('video', 'leftController')) {
         window.activeMedia.video.togglePlay()
       }
+      if (holdingRemote('radio', 'leftController')) {
+        window.activeMedia.radio.togglePlay()
+      }
     });
 
     // Y-button 
     this.el.addEventListener('ybuttonup', function (e) {
       if (holdingRemote('video', 'leftController')) {
         window.activeMedia.video.togglePlay()
+      }
+      if (holdingRemote('radio', 'leftController')) {
+        window.activeMedia.radio.togglePlay()
       }
     });
 
@@ -128,12 +141,18 @@ AFRAME.registerComponent('input-listen', {
       if (holdingRemote('video', 'rightController')) {
         window.activeMedia.video.togglePlay()
       }
+      if (holdingRemote('radio', 'rightController')) {
+        window.activeMedia.radio.togglePlay()
+      }
     });
 
     // B-button
     this.el.addEventListener('bbuttonup', function (e) {
       if (holdingRemote('video', 'rightController')) {
         window.activeMedia.video.togglePlay()
+      }
+      if (holdingRemote('radio', 'rightController')) {
+        window.activeMedia.radio.togglePlay()
       }
     });
   }
