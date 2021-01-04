@@ -114,7 +114,7 @@ export function Remote ({ name, color = 'black', btnColor = 'blue', actions = {}
     window.remotes[name] = { active: false, hand, actions: { ...actions, updateText }, wasRecentlyActive }
     hand && window.controllers[hand].restoreMesh()
 
-    setTimeout(() => window.remotes[name].wasRecentlyActive = false, 500)
+    setTimeout(() => window.remotes[name].wasRecentlyActive = false, 400)
   })
 
   remote.appendChild(playBtn1)

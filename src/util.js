@@ -86,7 +86,7 @@ export function randomColor (colors) {
   )
 }
 
-export const debounce = (fn, { time = 300, debug = false } = {}) => {
+export const debounce = (fn, { time = 500, debug = false } = {}) => {
   let timeout = null
   const clear = () => {
     clearTimeout(timeout)
