@@ -55,3 +55,6 @@ export { ImageAsset, onImageLoad, getImageDimensions }
 
 const { Asset: VideoAsset, onLoad: onVideoLoad, getDimensions: getVideoDimensions } = makeAssetLoader('video')
 export { VideoAsset, onVideoLoad, getVideoDimensions }
+
+const { Asset: SoundAsset, onLoad: onSoundLoad } = makeAssetLoader('audio')
+export { SoundAsset, onSoundLoad }

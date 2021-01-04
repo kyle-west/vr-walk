@@ -1,6 +1,7 @@
 import { debounce } from './util.js'
 import { ImageWall } from './image-wall.js'
 import { VideoViewer } from './video-viewer.js'
+import { Radio } from './radio.js'
 import { addToWorld } from './env.js'
 import { Remote } from './remote.js'
 import config from './config.js'
@@ -62,7 +63,7 @@ export function generateVideoViewer (videos) {
     VideoViewer({ videos, position: '12 0 -2'}), 
     Remote({
       name: 'video', 
-      position: '6 1 -2',
+      position: '6 2 -2',
       // position: '0 1.3 -0.5',
       actions: {
         next: debounce(() => {
@@ -80,7 +81,49 @@ export function generateVideoViewer (videos) {
             window.remotes.video.actions.updateText(getQueueText(), true)
             play()
           }
-        }) 
+        }),
+        togglePlay: debounce(() => {
+          if (window.activeMedia && window.activeMedia.video) {
+            const { togglePlay } = window.activeMedia.video
+            togglePlay()
+          }
+        }),
+      }
+    })
+  )
+}
+
+export function generateRadio (sounds) {
+  addToWorld(
+    Radio({ sounds, position: '-12 0 2', rotation: '0 200 0'}), 
+    Remote({
+      name: 'radio',
+      color: 'white',
+      position: '-11 2 1.3',
+      rotation: '0 180 0',
+      actions: {
+        next: debounce(() => {
+          if (window.activeMedia && window.activeMedia.radio) {
+            const { getNext, select, play, getQueueText } = window.activeMedia.radio
+            select(getNext())
+            window.remotes.radio.actions.updateText(getQueueText(), true)
+            play()
+          }
+        }), 
+        previous: debounce(() => {
+          if (window.activeMedia && window.activeMedia.radio) {
+            const { getPrev, select, play, getQueueText } = window.activeMedia.radio
+            select(getPrev())
+            window.remotes.radio.actions.updateText(getQueueText(), true)
+            play()
+          }
+        }),
+        togglePlay: debounce(() => {
+          if (window.activeMedia && window.activeMedia.radio) {
+            const { togglePlay } = window.activeMedia.radio
+            togglePlay()
+          }
+        }),
       }
     })
   )

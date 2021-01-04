@@ -51,7 +51,6 @@ export const fetchVideos = () =>
       src:
         "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
       subtitle: "By Blender Foundation",
-      thumb: "images/BigBuckBunny.jpg",
       title: "Big Buck Bunny",
     },
     {
@@ -59,7 +58,6 @@ export const fetchVideos = () =>
       src:
         "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
       subtitle: "By Blender Foundation",
-      thumb: "images/ElephantsDream.jpg",
       title: "Elephant Dream",
     },
     {
@@ -68,7 +66,6 @@ export const fetchVideos = () =>
       src:
         "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
       subtitle: "By Blender Foundation",
-      thumb: "images/Sintel.jpg",
       title: "Sintel",
     },
     {
@@ -77,7 +74,27 @@ export const fetchVideos = () =>
       src:
         "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
       subtitle: "By Blender Foundation",
-      thumb: "images/TearsOfSteel.jpg",
       title: "Tears of Steel",
+    },
+  ]);
+
+export const fetchRecordings = () =>
+  fetchReturn([
+    // from: https://publicdomainreview.org/collection/edison-reading-mary-had-a-little-lamb-1927
+    {
+      title: "Edison reading Mary Had a Little Lamb (1927)",
+      description:
+        "The first words Thomas A. Edison spoke into the phonograph (1927)",
+      src:
+        "https://archive.org/download/EDIS-SCD-02/EDIS-SCD-02.mp3",
+    },
+
+    // from: https://publicdomainreview.org/collection/morning-on-the-farm-1897
+    {
+      title: "Morning on the Farm (1897)",
+      description:
+        "A recording from the Library of Congress Berliner collection - the performer N.R. Wood imitates various animal sounds heard during the early morning, including sheep, cattle, cock, hens, guinea hen, turkey, hawk, crow, and other birds. Recorded in Washington, D.C. by Berliner Gramophone, 5th August 1897.",
+      src:
+        "https://archive.org/download/MorningOnTheFarm/LOC-farmyardnoises.mp3",
     },
   ]);
