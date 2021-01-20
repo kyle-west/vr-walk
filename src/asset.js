@@ -43,7 +43,7 @@ function makeAssetLoader(tagname, srcKey = 'src') {
   const onLoad = (name, cb) => {
     const url = name.replace('#', '')
     const item = items[url];
-    item.addEventListener('load', cb, { once : true })
+    item && item.addEventListener('load', cb, { once : true })
   }
 
   return { items, Asset, getDimensions, onLoad }

@@ -69,17 +69,21 @@ export function generateVideoViewer (videos) {
         next: debounce(() => {
           if (window.activeMedia && window.activeMedia.video) {
             const { getNext, select, play, getQueueText } = window.activeMedia.video
-            select(getNext())
-            window.remotes.video.actions.updateText(getQueueText(), true)
-            play()
+            window.remotes.video.actions.updateText({main: 'Loading Video...', left: ' ', right: ' '})
+            select(getNext()).then(() => {
+              window.remotes.video.actions.updateText(getQueueText(), true)
+              play()
+            })
           }
         }), 
         previous: debounce(() => {
           if (window.activeMedia && window.activeMedia.video) {
             const { getPrev, select, play, getQueueText } = window.activeMedia.video
-            select(getPrev())
-            window.remotes.video.actions.updateText(getQueueText(), true)
-            play()
+            window.remotes.video.actions.updateText({main: 'Loading Video...', left: ' ', right: ' '})
+            select(getPrev()).then(() => {
+              window.remotes.video.actions.updateText(getQueueText(), true)
+              play()
+            })
           }
         }),
         togglePlay: debounce(() => {
@@ -105,17 +109,21 @@ export function generateRadio (sounds) {
         next: debounce(() => {
           if (window.activeMedia && window.activeMedia.radio) {
             const { getNext, select, play, getQueueText } = window.activeMedia.radio
-            select(getNext())
-            window.remotes.radio.actions.updateText(getQueueText(), true)
-            play()
+            window.remotes.radio.actions.updateText({main: 'Loading Audio...', left: ' ', right: ' '})
+            select(getNext()).then(() => {
+              window.remotes.radio.actions.updateText(getQueueText(), true)
+              play()
+            })
           }
         }), 
         previous: debounce(() => {
           if (window.activeMedia && window.activeMedia.radio) {
             const { getPrev, select, play, getQueueText } = window.activeMedia.radio
-            select(getPrev())
-            window.remotes.radio.actions.updateText(getQueueText(), true)
-            play()
+            window.remotes.radio.actions.updateText({main: 'Loading Audio...', left: ' ', right: ' '})
+            select(getPrev()).then(() => {
+              window.remotes.radio.actions.updateText(getQueueText(), true)
+              play()
+            })
           }
         }),
         togglePlay: debounce(() => {

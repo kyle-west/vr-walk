@@ -37,6 +37,16 @@ export function VideoViewer ({ videos, lightIntensity,  ...rest }) {
       videoScreen.setAttribute('src', window.activeMedia.video.srcId)
 
       window.activeMedia.video.controlElem = vidElem
+      return new Promise(res => {
+        if (vidElem.hasLoadedBefore) {
+          res(vidElem)
+        } else {
+          vidElem.addEventListener('loadeddata', () => {
+            vidElem.hasLoadedBefore = true
+            res(vidElem)
+          }, {once: true})
+        }
+      })
     },
     getNext: () => {
       const { data } = window.activeMedia.video

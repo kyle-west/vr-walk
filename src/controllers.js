@@ -113,6 +113,7 @@ AFRAME.registerComponent('input-listen', {
       }
 
       log(`lastDirection: ${lastDirection}, holdingRemote('radio'): ${holdingRemote('radio')}, holdingRemote('video'): ${holdingRemote('video')}`)
+      lastDirection = null
     });
 
 

@@ -60,21 +60,32 @@ export function Radio ({ sounds, color = 'brown', ...rest }) {
     select: (sound) => {
       window.activeMedia.radio.pause()
 
-      const vidElem = SoundAsset(sound.src, {}, false)
+      const audioElem = SoundAsset(sound.src, {}, false)
       window.activeMedia.radio.data = sound
-      window.activeMedia.radio.srcId = '#' + vidElem.id
+      window.activeMedia.radio.srcId = '#' + audioElem.id
 
-      window.activeMedia.radio.controlElem = vidElem
+      window.activeMedia.radio.controlElem = audioElem
+
+      return new Promise(res => {
+        if (audioElem.hasLoadedBefore) {
+          res(audioElem)
+        } else {
+          audioElem.addEventListener('loadeddata', () => {
+            audioElem.hasLoadedBefore = true
+            res(audioElem)
+          }, {once: true})
+        }
+      })
     },
     getNext: () => {
       const { data } = window.activeMedia.radio
-      let idx = sounds.findIndex(vid => vid === data)
+      let idx = sounds.findIndex(aud => aud === data)
       if (idx >= sounds.length - 1) idx = -1
       return sounds[idx + 1]
     },
     getPrev: () => {
       const { data } = window.activeMedia.radio
-      let idx = sounds.findIndex(vid => vid === data)
+      let idx = sounds.findIndex(aud => aud === data)
       if (idx - 1 < 0) idx = sounds.length
       return sounds[idx - 1]
     },

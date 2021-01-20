@@ -1,7 +1,7 @@
 import { ImageAsset } from './asset.js'
 
 // mock fetching
-const fetchReturn = (assets) => new Promise(r => setTimeout(() => r(assets), 500))
+export const fetchReturn = (assets) => new Promise(r => setTimeout(() => r(assets), 500))
 
 const catImg = (topic = '') => ImageAsset(`https://cataas.com/cat${topic ? `/${topic}` : ''}?cache_bust=${Math.random()}`)
 export const fetchImages = () => fetchReturn([
